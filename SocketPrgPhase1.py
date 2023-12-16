@@ -1,7 +1,7 @@
 import socket
 import re
 
-#128.119.245.12
+#an Example IP for you: 128.119.245.12
 
 # Regular Expression Pattern to recognise ip_add_entered addresses.
 ip_add_pattern = re.compile("^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$")
@@ -90,27 +90,69 @@ def Scan_Ports():
                 print(f"--Port {port} is open --Servise: {serviceName}")
             except:
                 print(f"--Port {port} is open --Servise: Unknown")
-
+# sending client request to local host while. 
+# warnning: This module only works when server.py is running on local host
+def send_request(request, HOST, PORT):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
+            client_socket.connect((HOST, PORT))
+            client_socket.sendall(request.encode('utf-8'))
+            response = client_socket.recv(1024).decode('utf-8')
+            print(f'Response from server: {response}')        
+# HTTP request simulation with local host
 def get_post():
-    
+    HOST = 'localhost'
+    PORT = 8080
+    while True:
+        Order = input("Enter Your Request in format: <GET user_id> or <POST user_name user_age>: \n (Enter 0 to Exit)\n")
 
+        if Order == '0':
+            break
 
+        # GET Request
+        request = Order.split()
+        if request[0] == "GET":
+            send_request(Order, HOST, PORT)
+
+        # POST Request
+        elif request[0] == "POST":
+            send_request(Order, HOST, PORT)
+
+        else:
+            print("Invalid request try again")
+# User guid
+def ask_countinue():
+    argument = int(input("Do want to countinue? (Enter-> 1 to continue or 0 to exit): "))
+    match argument:
+        case 1:
+            Get_order()
+        case 0:
+            exit()
+        case default:
+            print("Wrong Order Code! Try again: \n")
+            ask_countinue()
+# execute user order
 def Run_order(argument):
     match argument:
         case 1:
             Check_Host()
+            ask_countinue()
         case 2:
             Scan_Ports()
+            ask_countinue()
         case 3:
             get_post()
+            ask_countinue()
+        case 4:
+            exit()
         case default:
             print("Wrong Order Code! Try again: \n")
             Get_order()
-
+#get user order
 def Get_order():
     print("Want You Want to Do? \n 1) Check Host State \n 2) Check Open Ports and Processes on Host"
-      ,"\n 3) Get and  Post Method Simulation \n Enter Your Order Code: ")
+      ,"\n 3) HTTP Request Simulation \n 4) Exit \n Enter Your Order Code: ")
     Ordr = int(input())
     Run_order(Ordr)
 
-Get_order()
+if __name__ == '__main__':
+    Get_order()
