@@ -1,8 +1,5 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/ZC6CWCW6)
 # phase01
-
-شما می‌توانید مستند این فاز را از این ریپو دانلود کرده و مشاهده نمایید.
-
-مهلت تحویل این فاز  روز ۱۴ آذرماه ساعت ۱۲ شب می‌باشد
-
-کد های خود را ابتدا روی برنچ های کمکی پوش کرده و در نهایت با برنچ اصلی مرج نمایید.
+Hi there,
+In this project phase I have made a Host Status Checher that showes if a host is online or not, Also you can see open processes and ports on a host if it's online.
+The third part is a simulation of packet get and post protocols in Http. 
